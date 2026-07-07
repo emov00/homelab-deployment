@@ -3,6 +3,9 @@ kind: Application
 metadata:
   name: bootstrap-apps
   namespace: argocd
+    # Finalizer that ensures that  is not deleted until it is not referenced by any application
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 spec:
   project: bootstrap-project
 
