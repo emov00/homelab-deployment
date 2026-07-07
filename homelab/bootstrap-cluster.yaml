@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: bootstrap-project
+  name: bootstrap-cluster
   namespace: argocd
 spec:
   project: bootstrap-project
@@ -9,11 +9,11 @@ spec:
   source:
     repoURL: https://github.com/emov00/homelab-deployment.git
     targetRevision: main
-    path: homelab/projects
+    path: homelab/cluster
 
   destination:
     name: homelab
-    
+
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
