@@ -17,7 +17,7 @@ extraObjects:
         - web
       routes:
         - kind: Rule
-          match: Host(`argocd.homelab`)
+          match: Host(`argocd.homelab.me`)
           services:
             - name: argocd-server
               port: 80
