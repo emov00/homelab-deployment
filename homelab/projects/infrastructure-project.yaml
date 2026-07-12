@@ -15,3 +15,7 @@ spec:
   destinations:
   - namespace: '*'
     name: homelab
+
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
