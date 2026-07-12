@@ -1,3 +1,5 @@
+k3d cluster create --config k3d-config.yaml
+
 helm install argocd argo/argo-cd \
   --namespace argocd \
   --create-namespace \
