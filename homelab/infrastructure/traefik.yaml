@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: traefik
+  namespace: argocd
+spec:
+  project: infrastructure
+  sources:
+    - repoURL: https://traefik.github.io/charts
+      chart: traefik
+      targetRevision: '40.2.0'
+      helm:
+        valueFiles:
+          - $values/homelab/infrastructure/traefik/values.yaml
+    - repoURL: https://github.com/emov00/homelab-deployment.git
+      targetRevision: main
+      ref: values
+  destination:
+    name: homelab
+    namespace: traefik
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true

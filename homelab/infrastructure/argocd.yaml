@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argocd
+  namespace: argocd
+spec:
+  project: "infrastructure"
+  sources:
+    - repoURL: ghcr.io/argoproj/argo-helm
+      chart: argo-cd
+      targetRevision: '10.1.1'
+      helm:
+        valueFiles:
+          - $values/homelab/infrastructure/argocd/values.yaml
+    - repoURL: https://github.com/emov00/homelab-deployment.git
+      targetRevision: main
+      ref: values
+  destination:
+    name: homelab
+    namespace: 'argocd'
+  ignoreDifferences:
+    - group: ""
+      kind: Secret
+      name: argocd-secret
+      namespace: argocd
+      jqPathExpressions:
+        - '.data["admin.passwordMtime"]'
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    - RespectIgnoreDifferences=true
