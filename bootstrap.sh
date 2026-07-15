@@ -11,12 +11,6 @@ helm install argocd argo/argo-cd \
   --wait 
 echo "### Argo CD installation complete ###"
 
-# kubectl port-forward service/argocd-server -n argocd 8080:443
-
-# echo "### Retreiving initial argocd password ###"
-# argocd_password=$(kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d)
-# echo "password saved to argocd_password"
-
 echo "### Applying bootstrap-project-project ###"
 kubectl apply -f homelab/projects/bootstrap-project-project.yaml --wait
 

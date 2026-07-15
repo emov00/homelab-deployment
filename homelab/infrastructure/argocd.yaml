@@ -19,8 +19,7 @@ spec:
     name: homelab
     namespace: 'argocd'
   ignoreDifferences:
-    - group: ""
-      kind: Secret
+    - kind: Secret
       name: argocd-secret
       namespace: argocd
       jqPathExpressions:
